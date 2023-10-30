@@ -1,0 +1,100 @@
+<form [formGroup]="cForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="tipo">Tipologia</label>
+    <select id="tipo" class="form-select" formControlName="tipo">
+      <option value="f">Persona Fisica</option>
+      <option value="g">Persona Giuridica</option>
+    </select>
+  </div>
+  <div class="mb-3" *ngIf="isPersonaFisica">
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" class="form-control" formControlName="nome" />
+    <div class="invalid-feedback" *ngIf="nomeFormControl.hasError('required')">
+      Obbligatorio
+    </div>
+  </div>
+  <div class="mb-3" *ngIf="isPersonaFisica">
+    <label for="cognome">Cognome</label>
+    <input
+      id="cognome"
+      type="text"
+      class="form-control"
+      formControlName="cognome"
+    />
+    <div *ngIf="cognomeFormControl.hasError('required')">Obbligatorio</div>
+  </div>
+  <div class="mb-3" *ngIf="!isPersonaFisica">
+    <label for="rag_soc">Ragione Sociale</label>
+    <input
+      id="rag_soc"
+      type="text"
+      class="form-control"
+      formControlName="rag_soc"
+    />
+    <div *ngIf="rag_socFormControl.hasError('required')">Obbligatorio</div>
+  </div>
+  <div class="mb-3">
+    <label for="email">E-mail</label>
+    <input
+      id="email"
+      type="text"
+      class="form-control"
+      formControlName="email"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="tel">Cellulare</label>
+    <input id="tel" type="text" class="form-control" formControlName="tel" />
+  </div>
+  <div class="mb-3">
+    <label for="dataCompleanno">Compleanno</label>
+    <input
+      id="dataCompleanno"
+      type="text"
+      class="form-control"
+      formControlName="dataCompleanno"
+    />
+  </div>
+  <h2>Indirizzo</h2>
+  <div formGroupName="indirizzo">
+    <div class="mb-3">
+      <label for="via">Via</label>
+      <input id="via" type="text" class="form-control" formControlName="via" />
+    </div>
+    <div class="mb-3">
+      <label for="citta">Città</label>
+      <input
+        id="citta"
+        type="text"
+        class="form-control"
+        formControlName="citta"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="provincia">Provincia</label>
+      <input
+        id="provincia"
+        type="text"
+        class="form-control"
+        formControlName="provincia"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="cap">CAP</label>
+      <input id="cap" type="text" class="form-control" formControlName="cap" />
+    </div>
+    <div class="mb-3">
+      <label for="nazione">Nazione</label>
+      <input
+        id="nazione"
+        type="text"
+        class="form-control"
+        formControlName="nazione"
+      />
+    </div>
+  </div>
+  <button class="btn btn-primary" [disabled]="cForm.invalid">
+    {{ editMode ? "Salva" : "Aggiungi" }}
+  </button>
+  <a routerLink="" class="btn btn-secondary">Annulla</a>
+</form>
